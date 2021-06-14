@@ -155,7 +155,7 @@
         <executions>
           <execution>
             <id>nohttp-checkstyle-validation</id>
-            <phase>validate</phase>
+            <phase>none</phase>
             <configuration>
               <configLocation>src/checkstyle/nohttp-checkstyle.xml</configLocation>
               <suppressionsLocation>src/checkstyle/nohttp-checkstyle-suppressions.xml</suppressionsLocation>
