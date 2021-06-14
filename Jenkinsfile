@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "ifaridi79/springboot-petclinic"
+        registry = "ifaridi79/springboot-petclinic-2.5.4"
         registryCredential = 'dockerhub-credential'
         dockerImage = ''
     } 
@@ -38,7 +38,7 @@ pipeline {
             steps {               
                 sh 'echo Creating Docker Image'
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry
                 }                
                 
             }
@@ -49,7 +49,8 @@ pipeline {
                 sh 'echo uploading Artifact to Docker Registry'  
                 script {
                 docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
+                    dockerImage.push("${env.BUILD_NUMBER}")
+                    dockerImage.push("latest")
                     }
                 }                           
             }
