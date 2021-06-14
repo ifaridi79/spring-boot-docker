@@ -60,11 +60,12 @@ docker rm <container_name>
 
 Jenkins will be used as a pipeline to pull the latest source code from Github to compile, test, package as a docker image and then upload this image in DockerHub as an artifact ready to deploy code.
 
-DockerHub Registry: ifaridi79/springboot-petclinic
+DockerHub Registry: ifaridi79/springboot-petclinic-2.5.4
 
 In order to pull the latest image or specific tag image
 ```
-docker pull ifaridi79/springboot-petclinic:<BUILD_NUMBER>
+docker pull ifaridi79/springboot-petclinic-2.5.4:latest
+docker pull ifaridi79/springboot-petclinic-2.5.4:<BUILD_NUMBER>
 ```
 Jenkinsfile being used as a declarative pipeline as code, defined upto 5 stages:
 1. Compile
@@ -73,7 +74,14 @@ Jenkinsfile being used as a declarative pipeline as code, defined upto 5 stages:
 4. Upload Artifacts
 5. Clean Up
 
-Make sure to configure credential Id for Docker Hub in Jenkins and configure tools like Maven and JDK in Jenkins.
+Make sure to configure credential Ids for Docker Hub and GitHub in Jenkins Credentail Manager:
+
+e.g. DockerHub credentail Id in Jenkinsfile
+```
+registryCredential = 'dockerhub-credential'
+```
+
+Configure tools like Maven and JDK in Jenkins.
 
 ```
    tools { 
